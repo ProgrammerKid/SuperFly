@@ -2,6 +2,8 @@ var image_cache = [];
 var curr_image = 0;
 var slideshow_running = 0;
 
+
+
 function preview() {
 	var images = document.getElementById("images").value;
 	if(images.indexOf(",") >= 0)
@@ -21,13 +23,13 @@ function preview() {
 function fullscreen() {
     var elem = document.body;
     if (elem.requestFullscreen)
-        elem.requestFullscreen();
+		elem.requestFullscreen();
     else if (elem.msRequestFullscreen)
-        elem.msRequestFullscreen();
+		elem.msRequestFullscreen();
     else if (elem.mozRequestFullScreen)
-        elem.mozRequestFullScreen();
+		elem.mozRequestFullScreen();
     else if (elem.webkitRequestFullscreen)
-        elem.webkitRequestFullscreen();
+		elem.webkitRequestFullscreen();
 
 }
 
@@ -109,11 +111,13 @@ function saveProfile() {
 		if(profilesAsArray().indexOf(name) < 0)
 			profiles = profiles + ",`" + name + "`"; //no spaces between commas and items
 	}
-
 	localStorage.setItem("profiles", profiles);
 
 	localStorage.setItem(name+"-brightness", brightness);
 	localStorage.setItem(name+"-images", images);
+	
+	//refresh the page to clear up things
+	window.location = "index.html"
 }
 
 function changeBGBrightness() {
@@ -135,6 +139,9 @@ function loadProfile() {
 
 function deleteProfile() {
 	var name = document.getElementById("delete-profile-name").value;
+	var request = confirm("Are you sure you want to delete " + name + ". This action cannot be reversed");
+	if(request != true) return 0; //if user exits prompt, then it doesn't show up as false, which is why we say anything but true, then exit
+
 	var profiles = localStorage.getItem("profiles");
 	profiles = profiles.replace("`"+name+"`", "");
 	profiles = profiles.replace(",,", ",");
@@ -185,5 +192,9 @@ $(document).ready(function() {
 			document.getElementById("delete-profile-name").appendChild(foo);
 		}
 	}
+	
+	//load the last made profile on startup
+	if(localStorage.getItem("profiles").length > 1)
+		loadProfile();
 
 });

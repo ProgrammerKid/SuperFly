@@ -16,19 +16,19 @@
 			<div class="profileOptions" id="profileOptions">
 				<b>Save Profile</b>
 				<br>
-				Profile Name: <input id="save-profile-name"> <button onClick="saveProfile()">Save Profile</button>
+				<input id="save-profile-name" placholder="Profile Name"> <button onClick="saveProfile()">Save Profile</button>
 
 				<br><br>
 
 				<b>Load Profile</b>
 				<br>
-				Profile Name: <select id="load-profile-name"></select> <button onClick="loadProfile()">Load Profile</button>
+				<select id="load-profile-name" placeholder="Profile Name"></select> <button onClick="loadProfile()">Load Profile</button>
 				
 				<br><br>
 
 				<b><span style='color:red'>Delete Profile</span></b>
 				<br>
-				Profile Name: <select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
+				<select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
 			</div>
 			<br>
 
@@ -49,6 +49,13 @@
 			<br>
 			0% <input type="range" id="bg-dimmer" min=0 max=100 value=100> 100%
 			<br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<br><br>
+
+			<b>Border</b>
+			<br>
+			Color: <input type="color" id="border-color"><br>
+			Width: <input type="number" id="border-width" placeholder="pixels">
 		</div>
 		
 
