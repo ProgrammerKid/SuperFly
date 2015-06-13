@@ -102,7 +102,9 @@ function saveProfile() {
 	var name = document.getElementById("save-profile-name").value;
 	var images = document.getElementById("images").value;
 	var brightness = document.getElementById("bg-dimmer").value;
-	
+	var bordercolor = document.getElementById("border-color").value;
+	var borderwidth = document.getElementById("border-width").value;
+
 	var profiles = localStorage.getItem("profiles");
 	if(profiles == undefined || profiles == "") {
 		localStorage.setItem("profiles", "");
@@ -115,7 +117,8 @@ function saveProfile() {
 
 	localStorage.setItem(name+"-brightness", brightness);
 	localStorage.setItem(name+"-images", images);
-	
+	localStorage.setItem(name+"-bordercolor", bordercolor);
+	localStorage.setItem(name+"-borderwidth", borderwidth);
 	//refresh the page to clear up things
 	window.location = "index.html"
 }
@@ -130,11 +133,19 @@ function loadProfile() {
 	var name = document.getElementById("load-profile-name").value;
 	var images = localStorage.getItem(name+"-images");
 	var brightness = localStorage.getItem(name+"-brightness");
+	var bordercolor = localStorage.getItem(name+"-bordercolor");
+	var borderwidth = localStorage.getItem(name+"-borderwidth");
 
+	//show in editor
 	document.getElementById("save-profile-name").value = name;
 	document.getElementById("images").value = images;
 	document.getElementById("bg-dimmer").value = parseInt(brightness);
+	document.getElementById("border-color").value = bordercolor;
+	document.getElementById("border-width").value = borderwidth;
+
+	//change stlyings to show up in the presentation
 	changeBGBrightness();
+	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
 }
 
 function deleteProfile() {
