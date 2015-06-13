@@ -31,7 +31,7 @@ html, body {
 	z-index: 1;
 	width: 25%;
 	position: absolute;
-	top: 150px;
+	top: 12.5%;
 	left: calc(50% - 12.5%);
 	border: 5px solid white;
 	border-radius: 5px;

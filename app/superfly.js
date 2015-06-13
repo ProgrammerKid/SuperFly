@@ -174,6 +174,11 @@ $(document).ready(function() {
 					next();
 				break;
 
+				case 40: //down
+					showHide("board");
+					showHide("editor");
+				break;
+
 				default:
 					return 0;
 			}
