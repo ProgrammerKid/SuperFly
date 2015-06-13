@@ -13,6 +13,19 @@ function preview() {
 	}
 }
 
+function fullscreen() {
+    var elem = document.body;
+    if (elem.requestFullscreen)
+        elem.requestFullscreen();
+    else if (elem.msRequestFullscreen)
+        elem.msRequestFullscreen();
+    else if (elem.mozRequestFullScreen)
+        elem.mozRequestFullScreen();
+    else if (elem.webkitRequestFullscreen)
+        elem.webkitRequestFullscreen();
+
+}
+
 function view() {
 	preview();
 	//lockdown the editor
@@ -55,8 +68,8 @@ $(document).ready(function() {
 			case 37: //left
 				previous();
 			break;
-
-			case 39:
+			
+			case 39: //right
 				next();
 			break;
 

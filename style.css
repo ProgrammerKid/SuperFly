@@ -15,7 +15,7 @@ html, body {
 	-webkit-filter: blur(80px);
 	width: 200%;
 	margin-left: -500px;
-	margin-top: -400px;
+	margin-top: -500px;
 	z-index: -1;
 }
 
@@ -24,7 +24,7 @@ html, body {
 	z-index: 1;
 	width: 25%;
 	position: absolute;
-	top: 200px;
+	top: 150px;
 	left: calc(50% - 12.5%);
 	border: 5px solid white;
 	border-radius: 5px;
