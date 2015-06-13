@@ -14,9 +14,10 @@ function preview() {
 
 function view() {
 	preview();
-	document.getElementById("editor").innerHTML = "";
+	//lockdown the editor
+	document.getElementById("editor").hidden = "true";
+	//unlock presentation board
+	document.getElementById("board").hidden = "false";
 
-	//create presentation board
-	var canvas = document.createElement("DIV");
-
+	
 }
