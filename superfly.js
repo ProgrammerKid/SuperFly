@@ -76,11 +76,22 @@ function previous() {
 }
 
 function profilesAsArray() {
-	var i = localStorage.getItem("profiles");
-	while(i.indexOf("`") >= 0)
-		i = i.replace("`", "'");
-	i = "[" + i + "]";
+	try {
+		var i = localStorage.getItem("profiles");
+		while(i.indexOf("`") >= 0)
+			i = i.replace("`", "'");
+		i = "[" + i + "]";
+	} catch(TypeError) {
+		i = "['']";
+	}
 	return eval(i);
+}
+
+function saveArrayAsProfile(i) {
+	var i = i + "";
+	while(i.indexOf("'") >= 0)
+		i = i.replace("'", "`");
+	localStorage.setItem("profiles", i);
 }
 
 function saveProfile() {
@@ -91,12 +102,12 @@ function saveProfile() {
 	var brightness = document.getElementById("bg-dimmer").value;
 	
 	var profiles = localStorage.getItem("profiles");
-	if(profiles == undefined) {
+	if(profiles == undefined || profiles == "") {
 		localStorage.setItem("profiles", "");
 		profiles = "`" + name + "`";
 	} else {
 		if(profilesAsArray().indexOf(name) < 0)
-			profiles = profiles + ", `" + name + "`";
+			profiles = profiles + ",`" + name + "`"; //no spaces between commas and items
 	}
 
 	localStorage.setItem("profiles", profiles);
@@ -120,6 +131,17 @@ function loadProfile() {
 	document.getElementById("images").value = images;
 	document.getElementById("bg-dimmer").value = parseInt(brightness);
 	changeBGBrightness();
+}
+
+function deleteProfile() {
+	var name = document.getElementById("delete-profile-name").value;
+	var profiles = localStorage.getItem("profiles");
+	profiles = profiles.replace("`"+name+"`", "");
+	profiles = profiles.replace(",,", ",");
+	localStorage.setItem("profiles", profiles);
+	localStorage.removeItem(name+"-background");
+	localStorage.removeItem(name+"-images");
+	window.location = "index.html";
 }
 
 $(document).ready(function() {
@@ -147,9 +169,21 @@ $(document).ready(function() {
 
 	//automatically load profiles browse things
 	for(i in profilesAsArray()) {
-		var foo = document.createElement("OPTION");
-		foo.innerHTML = profilesAsArray()[i];
-		foo.value = profilesAsArray()[i];
-		document.getElementById("load-profile-name").appendChild(foo);
+		if(profilesAsArray()[i] != "") {
+			var foo = document.createElement("OPTION");
+			foo.innerHTML = profilesAsArray()[i];
+			foo.value = profilesAsArray()[i];
+			document.getElementById("load-profile-name").appendChild(foo);
+		}
 	}
+	//and do the same for deleting profiles
+	for(i in profilesAsArray()) {
+		if(profilesAsArray()[i] != "") {
+			var foo = document.createElement("OPTION");
+			foo.innerHTML = profilesAsArray()[i];
+			foo.value = profilesAsArray()[i];
+			document.getElementById("delete-profile-name").appendChild(foo);
+		}
+	}
+
 });

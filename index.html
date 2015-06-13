@@ -13,21 +13,27 @@
 	<div class="container">
 		<div class="editor" id="editor">
 			<button onClick="showHide('profileOptions')">Show/Hide Profile Options</button>
-			<div class="profileOptions" id="profileOptions" hidden>
-				Save Profile
+			<div class="profileOptions" id="profileOptions">
+				<b>Save Profile</b>
 				<br>
 				Profile Name: <input id="save-profile-name"> <button onClick="saveProfile()">Save Profile</button>
 
 				<br><br>
 
-				Load Profile
+				<b>Load Profile</b>
 				<br>
 				Profile Name: <select id="load-profile-name"></select> <button onClick="loadProfile()">Load Profile</button>
+				
+				<br><br>
+
+				<b><span style='color:red'>Delete Profile</span></b>
+				<br>
+				Profile Name: <select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
 			</div>
 			<br>
 
 			<br><br>
-			Slideshow Images
+			<b>Slideshow Images</b>
 			<br>
 			<textarea id="images"></textarea>
 
@@ -39,7 +45,7 @@
 
 			<br><br>
 
-			Background Brightness (<span id="bg-dimmer-output">100%</span>)
+			<b>Background Brightness (<span id="bg-dimmer-output">100%</span>)</b>
 			<br>
 			0% <input type="range" id="bg-dimmer" min=0 max=100 value=100> 100%
 			<br>&nbsp;&nbsp;&nbsp;&nbsp;
