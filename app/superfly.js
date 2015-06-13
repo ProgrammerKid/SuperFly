@@ -210,7 +210,11 @@ $(document).ready(function() {
 	}
 	
 	//load the last made profile on startup
-	if(localStorage.getItem("profiles").length > 1)
-		loadProfile();
+	try { //incase there is no length to profiles (in the if statement)
+		if(localStorage.getItem("profiles").length > 1)
+			loadProfile();
+	} catch(TypeError) {
+		//do nothing
+	}
 
 });

@@ -10,6 +10,16 @@ html, body {
 	margin-right: 20px;
 }
 
+#save-profile, #load-profile, #delete-profile {
+	opacity: 0.5;
+}
+
+#save-profile:hover, #load-profile:hover, #delete-profile:hover {
+	opacity: 1;
+	font-size: 26px;
+}
+
+
 .board {
 	width: 100%;
 	height: 100%;

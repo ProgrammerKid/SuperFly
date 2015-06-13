@@ -14,21 +14,27 @@
 		<div class="editor" id="editor">
 			<button onClick="showHide('profileOptions')">Show/Hide Profile Options</button>
 			<div class="profileOptions" id="profileOptions" hidden>
-				<b>Save Profile</b>
-				<br>
-				<input id="save-profile-name" placholder="Profile Name"> <button onClick="saveProfile()">Save Profile</button>
+				<span id="save-profile">
+					<b>Save Profile</b>
+					<br>
+					<input id="save-profile-name" placholder="Profile Name"> <button onClick="saveProfile()">Save Profile</button>
+				</span>
 
 				<br><br>
-
-				<b>Load Profile</b>
-				<br>
-				<select id="load-profile-name" placeholder="Profile Name"></select> <button onClick="loadProfile()">Load Profile</button>
 				
-				<br><br>
+				<span id="load-profile">
+					<b>Load Profile</b>
+					<br>
+					<select id="load-profile-name" placeholder="Profile Name"></select> <button onClick="loadProfile()">Load Profile</button>
+				</span>
 
-				<b><span style='color:red'>Delete Profile</span></b>
-				<br>
-				<select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
+				<br><br>
+				
+				<span id="delete-profile">
+					<b><span style='color:red'>Delete Profile</span></b>
+					<br>
+					<select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
+				</span>
 			</div>
 			<br>
 
