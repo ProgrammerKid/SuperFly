@@ -76,7 +76,7 @@ function saveProfile() {
 	var brightness = document.getElementById("bg-dimmer").value;
 
 	localStorage.setItem(name+"-brightness", brightness);
-	localStorage.setItem(name+"-images", image);
+	localStorage.setItem(name+"-images", images);
 }
 
 function changeBGBrightness() {
