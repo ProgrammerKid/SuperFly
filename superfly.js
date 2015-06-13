@@ -15,9 +15,9 @@ function preview() {
 function view() {
 	preview();
 	//lockdown the editor
-	document.getElementById("editor").hidden = "true";
+	document.getElementById("editor").hidden = true;
 	//unlock presentation board
-	document.getElementById("board").hidden = "false";
-
-	
+	document.getElementById("board").hidden = false;
+	document.getElementById("bg").src = image_cache[1];
+	document.getElementById("fg").src = image_cache[1];
 }

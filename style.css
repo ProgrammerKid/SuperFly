@@ -1,0 +1,31 @@
+html, body {
+	margin: 0; padding: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+.board {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+.background-blur {
+	-webkit-filter: blur(80px);
+	width: 200%;
+	margin-left: -500px;
+	margin-top: -400px;
+	z-index: -1;
+}
+
+
+.foreground-img {
+	z-index: 1;
+	width: 25%;
+	position: absolute;
+	top: 200px;
+	left: calc(50% - 12.5%);
+	border: 5px solid white;
+	border-radius: 5px;
+}	
