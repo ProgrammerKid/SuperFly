@@ -1,8 +1,11 @@
 var image_cache;
 var curr_image = 0;
+
 function preview() {
 	var images = document.getElementById("images").value;
-	images = images.split(",");
+	if(images.indexOf(",") >= 0)
+		images = images.split(",");
+
 	image_cache = images;
 	document.getElementById("preview").innerHTML = "";
 	for(i in images) {
