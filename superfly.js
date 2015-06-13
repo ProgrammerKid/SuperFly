@@ -5,7 +5,8 @@ function preview() {
 	var images = document.getElementById("images").value;
 	if(images.indexOf(",") >= 0)
 		images = images.split(",");
-
+	else
+		images = [images];
 	image_cache = images;
 	document.getElementById("preview").innerHTML = "";
 	for(i in images) {
@@ -35,8 +36,8 @@ function view() {
 	document.getElementById("editor").hidden = true;
 	//unlock presentation board
 	document.getElementById("board").hidden = false;
-	document.getElementById("bg").src = image_cache[1];
-	document.getElementById("fg").src = image_cache[1];
+	document.getElementById("bg").src = image_cache[0];
+	document.getElementById("fg").src = image_cache[0];
 }
 
 function changeImage(src) {
