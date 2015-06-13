@@ -1,5 +1,6 @@
-var image_cache;
+var image_cache = [];
 var curr_image = 0;
+var slideshow_running = 0;
 
 function preview() {
 	var images = document.getElementById("images").value;
@@ -38,6 +39,7 @@ function view() {
 	document.getElementById("board").hidden = false;
 	document.getElementById("bg").src = image_cache[0];
 	document.getElementById("fg").src = image_cache[0];
+	slideshow_running = 1;
 }
 
 function changeImage(src) {
@@ -66,26 +68,53 @@ function previous() {
 	changeImage(src);
 }
 
+function saveProfile() {
+	preview();
+	document.getElementById("preview").innerHTML = "";
+	var name = document.getElementById("save-profile-name").value;
+	var images = document.getElementById("images").value;
+	var brightness = document.getElementById("bg-dimmer").value;
+
+	localStorage.setItem(name+"-brightness", brightness);
+	localStorage.setItem(name+"-images", image);
+}
+
+function changeBGBrightness() {
+	document.getElementById("bg-dimmer-output").innerHTML = document.getElementById("bg-dimmer").value + "%";
+	document.getElementById("bg").style.opacity = parseInt(document.getElementById("bg-dimmer").value)/100;
+
+}
+
+function loadProfile() {
+	var name = document.getElementById("load-profile-name").value;
+	var images = localStorage.getItem(name+"-images");
+	var brightness = localStorage.getItem(name+"-brightness");
+
+	document.getElementById("save-profile-name").value = name;
+	document.getElementById("images").value = images;
+	document.getElementById("bg-dimmer").value = name;
+	changeBGBrightness();
+}
+
 $(document).ready(function() {
 	$(document).keydown(function(e) {
-		switch(e.which) {
-			case 37: //left
-				previous();
-			break;
-			
-			case 39: //right
-				next();
-			break;
+		if(slideshow_running) {
+			switch(e.which) {
+				case 37: //left
+					previous();
+				break;
+				
+				case 39: //right
+					next();
+				break;
 
-			default:
-				return 0;
+				default:
+					return 0;
+			}
+			e.preventDefault();
 		}
-		e.preventDefault();
 	});
 	
 	//settings the brightness of the background
-	$("#bg-dimmer").change(function() {
-		document.getElementById("bg-dimmer-output").innerHTML = document.getElementById("bg-dimmer").value + "%";
-		document.getElementById("bg").style.opacity = parseInt(document.getElementById("bg-dimmer").value)/100;
-	});
+	$("#bg-dimmer").change(changeBGBrightness);
 });
