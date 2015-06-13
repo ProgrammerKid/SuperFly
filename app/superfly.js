@@ -111,7 +111,7 @@ function saveProfile() {
 		profiles = "`" + name + "`";
 	} else {
 		if(profilesAsArray().indexOf(name) < 0)
-			profiles = profiles + ",`" + name + "`"; //no spaces between commas and items
+			profiles = "`" + name + "`," + profiles; //no spaces between commas and items
 	}
 	localStorage.setItem("profiles", profiles);
 
