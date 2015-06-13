@@ -1,4 +1,5 @@
 var image_cache;
+var curr_image = 0;
 function preview() {
 	var images = document.getElementById("images").value;
 	images = images.split(",");
@@ -21,3 +22,47 @@ function view() {
 	document.getElementById("bg").src = image_cache[1];
 	document.getElementById("fg").src = image_cache[1];
 }
+
+function changeImage(src) {
+	document.getElementById("bg").src = src;
+	document.getElementById("fg").src = src;
+}
+
+function next() {
+	var max = image_cache.length - 1;
+	if(curr_image + 1 > max) {
+		curr_image = 0;
+	} else {
+		curr_image++;
+	}
+	var src = image_cache[curr_image];
+	changeImage(src);
+}
+
+function previous() {
+	if(curr_image - 1 < 0) {
+		curr_image = image_cache.length - 1;
+	} else {
+		curr_image--;
+	}
+	var src = image_cache[curr_image];
+	changeImage(src);
+}
+
+$(document).ready(function() {
+	$(document).keydown(function(e) {
+		switch(e.which) {
+			case 37: //left
+				previous();
+			break;
+
+			case 39:
+				next();
+			break;
+
+			default:
+				return 0;
+		}
+		e.preventDefault();
+	});
+});
