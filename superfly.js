@@ -82,4 +82,10 @@ $(document).ready(function() {
 		}
 		e.preventDefault();
 	});
+	
+	//settings the brightness of the background
+	$("#bg-dimmer").change(function() {
+		document.getElementById("bg-dimmer-output").innerHTML = document.getElementById("bg-dimmer").value + "%";
+		document.getElementById("bg").style.opacity = parseInt(document.getElementById("bg-dimmer").value)/100;
+	});
 });
