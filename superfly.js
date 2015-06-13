@@ -31,6 +31,13 @@ function fullscreen() {
 
 }
 
+function showHide(id) {
+	if(document.getElementById(id).hidden == true)
+		document.getElementById(id).hidden = false;
+	else
+		document.getElementById(id).hidden = true;
+}
+
 function view() {
 	preview();
 	//lockdown the editor
@@ -68,12 +75,31 @@ function previous() {
 	changeImage(src);
 }
 
+function profilesAsArray() {
+	var i = localStorage.getItem("profiles");
+	while(i.indexOf("`") >= 0)
+		i = i.replace("`", "'");
+	i = "[" + i + "]";
+	return eval(i);
+}
+
 function saveProfile() {
 	preview();
 	document.getElementById("preview").innerHTML = "";
 	var name = document.getElementById("save-profile-name").value;
 	var images = document.getElementById("images").value;
 	var brightness = document.getElementById("bg-dimmer").value;
+	
+	var profiles = localStorage.getItem("profiles");
+	if(profiles == undefined) {
+		localStorage.setItem("profiles", "");
+		profiles = "`" + name + "`";
+	} else {
+		if(profilesAsArray().indexOf(name) < 0)
+			profiles = profiles + ", `" + name + "`";
+	}
+
+	localStorage.setItem("profiles", profiles);
 
 	localStorage.setItem(name+"-brightness", brightness);
 	localStorage.setItem(name+"-images", images);
@@ -92,7 +118,7 @@ function loadProfile() {
 
 	document.getElementById("save-profile-name").value = name;
 	document.getElementById("images").value = images;
-	document.getElementById("bg-dimmer").value = name;
+	document.getElementById("bg-dimmer").value = parseInt(brightness);
 	changeBGBrightness();
 }
 
@@ -117,4 +143,13 @@ $(document).ready(function() {
 	
 	//settings the brightness of the background
 	$("#bg-dimmer").change(changeBGBrightness);
+
+
+	//automatically load profiles browse things
+	for(i in profilesAsArray()) {
+		var foo = document.createElement("OPTION");
+		foo.innerHTML = profilesAsArray()[i];
+		foo.value = profilesAsArray()[i];
+		document.getElementById("load-profile-name").appendChild(foo);
+	}
 });
