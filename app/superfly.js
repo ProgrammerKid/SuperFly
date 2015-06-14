@@ -1,7 +1,7 @@
 var image_cache = [];
 var curr_image = 0;
 var slideshow_running = 0;
-
+var music;
 
 
 function preview() {
@@ -49,7 +49,20 @@ function view() {
 	document.getElementById("bg").src = image_cache[0];
 	document.getElementById("fg").src = image_cache[0];
 	slideshow_running = 1;
+	//no scrolling
 	document.body.style.overflow = "hidden";
+
+	//play music
+	music = document.createElement("VIDEO");
+	var source = document.createElement("SOURCE");
+	source.type = "audio/mp3";
+	source.src = document.getElementById("song_file").value;
+	music.appendChild(source);
+	music.autoplay = true;
+	music.controls = true;
+	music.hidden = true;
+	document.body.appendChild(music);
+	music.play();
 }
 
 function changeImage(src) {
@@ -187,6 +200,7 @@ $(document).ready(function() {
 					showHide("editor");
 					slideshow_running = 0;
 					document.body.style.overflow = "scroll";
+					music.pause();
 				break;
 
 				default:
