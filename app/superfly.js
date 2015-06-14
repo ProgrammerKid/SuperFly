@@ -243,4 +243,19 @@ $(document).ready(function() {
 		//do nothing
 	}
 
+	//show/hide the controls
+	$(document).mousemove(function() {
+		if(slideshow_running) {
+			$(".controls").mouseover(function() {
+				$(".controls").fadeIn(800);
+			});
+			$(".controls").mouseleave(function() {
+				$(".controls").fadeOut(800);
+			});
+			$(".controls").mousemove(function() {
+				$(".controls").fadeIn(800);
+			});
+		}
+	});
+
 });

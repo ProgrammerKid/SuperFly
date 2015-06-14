@@ -51,6 +51,7 @@ input[id=bg-dimmer] {
 
 .background-blur {
 	-webkit-filter: blur(80px);
+	-moz-filter: blur(80px);
 	width: 200%;
 	margin-left: -500px;
 	margin-top: -500px;
@@ -70,4 +71,11 @@ input[id=bg-dimmer] {
 	display: block;
 	border: 5px solid white;
 	border-radius: 5px;
-}	
+}
+
+.controls {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 30px;
+}
