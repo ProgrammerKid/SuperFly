@@ -56,7 +56,7 @@ function view() {
 	music = document.createElement("VIDEO");
 	var source = document.createElement("SOURCE");
 	source.type = "audio/mp3";
-	source.src = document.getElementById("song_file").value;
+	source.src = document.getElementById("song-file").value;
 	music.appendChild(source);
 	music.autoplay = true;
 	music.controls = true;
@@ -118,6 +118,7 @@ function saveProfile() {
 	var brightness = document.getElementById("bg-dimmer").value;
 	var bordercolor = document.getElementById("border-color").value;
 	var borderwidth = document.getElementById("border-width").value;
+	var songfile = document.getElementById("song-file").value;
 
 	var profiles = localStorage.getItem("profiles");
 	if(profiles == undefined || profiles == "") {
@@ -133,6 +134,7 @@ function saveProfile() {
 	localStorage.setItem(name+"-images", images);
 	localStorage.setItem(name+"-bordercolor", bordercolor);
 	localStorage.setItem(name+"-borderwidth", borderwidth);
+	localStorage.setItem(name+"-songfile", songfile);
 	//refresh the page to clear up things
 	window.location = "index.html"
 }
@@ -149,14 +151,14 @@ function loadProfile() {
 	var brightness = localStorage.getItem(name+"-brightness");
 	var bordercolor = localStorage.getItem(name+"-bordercolor");
 	var borderwidth = localStorage.getItem(name+"-borderwidth");
-
+	var songfile = localStorage.getItem(name+"-songfile");
 	//show in editor
 	document.getElementById("save-profile-name").value = name;
 	document.getElementById("images").value = images;
 	document.getElementById("bg-dimmer").value = parseInt(brightness);
 	document.getElementById("border-color").value = bordercolor;
 	document.getElementById("border-width").value = borderwidth;
-
+	document.getElementById("song-file").value = songfile;
 	//change stlyings to show up in the presentation
 	changeBGBrightness();
 	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
