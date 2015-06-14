@@ -1,7 +1,22 @@
+@import url(http://fonts.googleapis.com/css?family=Cantarell);
 html, body {
 	margin: 0; padding: 0;
 	height: 100%;
-	overflow: hidden;
+	background-color: rgb(230, 230, 230);
+	font-family: 'Cantarell', sans-serif;
+}
+
+input, textarea, button {
+	font-family: 'Cantarell', sans-serif;
+	border: none;
+}
+
+input[id=bg-dimmer] {
+	-webkit-appearance: none;
+	background: linear-gradient(to right, black,  white);
+	border-radius: 10px;
+	color: blue;
+	outline: none;
 }
 
 .editor {
@@ -10,13 +25,18 @@ html, body {
 	margin-right: 20px;
 }
 
+#images {
+	max-width: 100%;
+	width: 100%;
+	height: 50px;
+}
+
 #save-profile, #load-profile, #delete-profile {
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 #save-profile:hover, #load-profile:hover, #delete-profile:hover {
 	opacity: 1;
-	font-size: 26px;
 }
 
 
@@ -24,6 +44,7 @@ html, body {
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	vertical-align: middle;
 	overflow: hidden;
 	background-color: black;
 }
@@ -39,10 +60,14 @@ html, body {
 
 .foreground-img {
 	z-index: 1;
-	width: 25%;
+	height: 75%;
 	position: absolute;
-	top: 12.5%;
-	left: calc(50% - 12.5%);
+	top: 12.5%;	
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	display: block;
 	border: 5px solid white;
 	border-radius: 5px;
 }	

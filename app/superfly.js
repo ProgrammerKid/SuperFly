@@ -49,6 +49,7 @@ function view() {
 	document.getElementById("bg").src = image_cache[0];
 	document.getElementById("fg").src = image_cache[0];
 	slideshow_running = 1;
+	document.body.style.overflow = "hidden";
 }
 
 function changeImage(src) {
@@ -163,6 +164,13 @@ function deleteProfile() {
 }
 
 $(document).ready(function() {
+	$(document).scroll(function() {
+		if(slideshow_running)
+			document.body.style.overflow = "hidden";
+		else
+			document.body.style.overflow = "scroll";
+	});
+
 	$(document).keydown(function(e) {
 		if(slideshow_running) {
 			switch(e.which) {
@@ -177,6 +185,8 @@ $(document).ready(function() {
 				case 40: //down
 					showHide("board");
 					showHide("editor");
+					slideshow_running = 0;
+					document.body.style.overflow = "scroll";
 				break;
 
 				default:
