@@ -6,7 +6,7 @@ html, body {
 	font-family: 'Cantarell', sans-serif;
 }
 
-input, textarea, button {
+input, textarea, button, select, option {
 	font-family: 'Cantarell', sans-serif;
 	border: none;
 }
