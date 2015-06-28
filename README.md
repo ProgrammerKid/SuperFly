@@ -13,12 +13,12 @@ cd app
 ```
 4. Find your path
  1. In Mac  OS, Linux, BSD, or other UNIX like OS's:  
- ```pwd```
+  ```pwd```
 
- 2. In Windows
- ```echo %CD%```
-5. Copy the `path`, from you terminal
+ 2. In Windows  
+  ```echo %CD%```
+5. Copy the `path`, from your terminal
 6. Open a web browser
-7. In the url bar, paste the `path` to superfly
-8. In the same url bar, append `index.html` to the end of the URL
+7. In the URL bar, paste the `path` to superfly
+8. In the same URL bar, append `index.html` to the end of the URL
 9. Hit enter. (Or go, or whatever)
