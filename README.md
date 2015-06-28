@@ -6,14 +6,14 @@ Currently, Superfly is not hosted anywhere... therefore at the current moment, y
 1. Enter a terminal window. (In windows this is the command prompt)
 2. Copy + Paste this line into the command line  
 ```git clone https://github.com/ProgrammerKid/SuperFly.git```
-3. `cd` into the new directory, and `cd` again into the `app` directory.  
+3. `cd` into the new directory, and `cd` again into the `app` directory.
 ```
 cd Superfly
 cd app
 ```
 4. Find your path
  1. In Mac  OS, Linux, BSD, or other UNIX like OS's:  
-  ```pwd```
+  ```pwd```  
 
  2. In Windows  
   ```echo %CD%```
