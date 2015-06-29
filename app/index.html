@@ -40,24 +40,29 @@
 			<br>
             <br>
             <hr>
-			<h1>Slideshow Images <button onClick="help.slideshow_images()"</h1>
+			<h1>Slideshow Images <button onClick="help.slideshow_images()">?</button></h1>
 			<br>
             <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').hidden = false">Enable Poweruser Mode</button>
             <button onClick="document.getElementById('images').hidden = true">Disable Poweruser Mode</button>
+            <button onClick="help.poweruser()">?</button>
             <br><br>
 			<textarea id="images" hidden></textarea>
             <b>Add to Dumping ground</b>
+            <button onClick="help.addToDG()">?</button>
             <br>
             <input id="newImageToAdd" />
             <button onClick="addImage()">Add</button>
 			<br>
             <b>Remove From Dumping Ground</b>
+            <button onClick="help.removeFromDG()">?</button>
             <br>
             <input id="removeImage" />
             <button onClick="removeImage()">Remove</button>
             <br><br>
-			<button onClick="view()">Continue</button>
-            <button onClick="preview()">Force Preview</button>
+			<button onClick="view()">Present</button>
+            <button onClick="preview()">Preview</button>
+            <br><br>
+            <b>Preview Film (Preview Panel)</b>
 			<div id="preview"></div>
             <br>
             <hr>
