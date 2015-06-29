@@ -202,7 +202,6 @@ function removeImage() {
 }
 
 $(document).ready(function() {
-
 	$(document).scroll(function() {
 		if(slideshow_running)
 			document.body.style.overflow = "hidden";

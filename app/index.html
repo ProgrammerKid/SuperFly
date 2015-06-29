@@ -58,7 +58,40 @@
 			<button onClick="view()">Continue</button>
             <button onClick="preview()">Force Preview</button>
 			<div id="preview"></div>
+            <br><br>
+            <hr>
+            <h1>Bulldozer Tool</h1>
+            <button onClick="showHide('bulldozer-tool')">Show/Hide The Bulldozer Tool</button>
+            <div id="bulldozer-tool" hidden>
+                <b>Swap Image</b>
+                <br>
+                <input id="swap-image1" placeholder="First Image" />
+                will swap with
+                <input id="swap-image2" placeholder="Second image" />
+                <button onClick="swapImages()">Swap</button>
 
+                <br><br>
+
+                <b>Replace Image</b>
+                <br>
+                <input id="sub-image-out" placeholder="Existing image" />
+                will be replaced with
+                <input id="sub-image-in" placeholder="New image" />
+
+                <br><br>
+
+                <b>Squeeze Image</b>
+                <br>
+                <select id="squeeze-location">
+                    <option value="beg">Beginning</option>
+                    <option value="end">End</option>
+                    <option value="after">After another Image</option>
+                </select>
+                <br>
+                <input id="squeeze-image" placeholder="New image" />
+                should be placed at the beginning, end, or after
+                <input id="squeeze-after" placeholder="the existing image">
+            </div>
 			<br><br>
             <h1>Settings</h1>
             <button onClick="showHide('settings')">Show/Hide Settings</button>
