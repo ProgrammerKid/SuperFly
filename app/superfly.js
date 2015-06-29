@@ -3,8 +3,21 @@ var curr_image = 0;
 var slideshow_running = 0;
 var music;
 
+function cleanDumpingGround() {
+    var dg = document.getElementById("images").value; //dumping ground contents
+    while(dg.indexOf(" ") >= 0)
+        dg = dg.replace(" ", "");
+    while(dg.indexOf(",,") >= 0)
+        dg = dg.replace(",,", ",");
+
+    if(dg.charAt(0) == ",")
+        dg = dg.substr(1, dg.length);
+
+    document.getElementById("images").value = dg;
+}
 
 function preview() {
+    cleanDumpingGround();
 	var images = document.getElementById("images").value;
 	if(images.indexOf(",") >= 0)
 		images = images.split(",");
@@ -18,19 +31,6 @@ function preview() {
 		img.height="100";
 		document.getElementById("preview").appendChild(img);
 	}
-}
-
-function fullscreen() {
-    var elem = document.body;
-    if (elem.requestFullscreen)
-		elem.requestFullscreen();
-    else if (elem.msRequestFullscreen)
-		elem.msRequestFullscreen();
-    else if (elem.mozRequestFullScreen)
-		elem.mozRequestFullScreen();
-    else if (elem.webkitRequestFullscreen)
-		elem.webkitRequestFullscreen();
-
 }
 
 function showHide(id) {
@@ -162,6 +162,7 @@ function loadProfile() {
 	//change stlyings to show up in the presentation
 	changeBGBrightness();
 	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
+    preview();
 }
 
 function deleteProfile() {
@@ -182,6 +183,7 @@ function addImage() {
     preview();
     var url = document.getElementById("newImageToAdd").value;
     document.getElementById("images").value = document.getElementById("images").value + ", " + url;
+    document.getElementById("newImageToAdd").value = ""; //remove url after done, so that we can reuse the input field
     preview();
 }
 
@@ -193,10 +195,14 @@ function removeImage() {
     dumpingGround = dumpingGround.replace(url, "");
     dumpingGround = dumpingGround.split(",");;
     document.getElementById("images").value = dumpingGround + "";
+
+    document.getElementById("removeImage").value = ""; //remove url after done, so that we can reuse the input field
+    cleanDumpingGround();   
     preview();
 }
 
 $(document).ready(function() {
+
 	$(document).scroll(function() {
 		if(slideshow_running)
 			document.body.style.overflow = "hidden";
@@ -260,5 +266,5 @@ $(document).ready(function() {
 	} catch(TypeError) {
 		//do nothing
 	}
-
+    preview();
 });

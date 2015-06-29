@@ -39,44 +39,50 @@
 			<br>
 
 			<br><br>
-			<h1>Slideshow Images (Dumping Ground)</h1>
+			<h1>Slideshow Images</h1>
 			<br>
-            <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').disabled = false">Enable Poweruser Mode</button>
-            <button onClick="document.getElementById('images').disabled = true">Disable Poweruser Mode</button>
+            <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').hidden = false">Enable Poweruser Mode</button>
+            <button onClick="document.getElementById('images').hidden = true">Disable Poweruser Mode</button>
             <br><br>
-			<textarea id="images" disabled></textarea>
+			<textarea id="images" hidden></textarea>
             <b>Add to Dumping ground</b>
             <br>
-            <input id="newImageToAdd" /><button onClick="addImage()">Add</button>
+            <input id="newImageToAdd" />
+            <button onClick="addImage()">Add</button>
 			<br>
             <b>Remove From Dumping Ground</b>
             <br>
-            <input id="removeImage" /><button onClick="removeImage()">Remove</button>
+            <input id="removeImage" />
+            <button onClick="removeImage()">Remove</button>
             <br><br>
 			<button onClick="view()">Continue</button>
             <button onClick="preview()">Force Preview</button>
 			<div id="preview"></div>
 
 			<br><br>
+            <button onClick="showHide('settings')">Show/Hide Settings</button>
+            <div id="settings" hidden>
+                <b>Background Brightness (<span id="bg-dimmer-output">100%</span>)</b>
+                <br>
+                0% <input type="range" id="bg-dimmer" min=0 max=100 value=100> 100%
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;
 
-			<b>Background Brightness (<span id="bg-dimmer-output">100%</span>)</b>
-			<br>
-			0% <input type="range" id="bg-dimmer" min=0 max=100 value=100> 100%
-			<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                <br><br>
 
-			<br><br>
+                <b>Border</b>
+                <br>
+                Color: <input type="color" id="border-color" placeholder="#e9e9e9"><br>
+                Width: <input type="number" id="border-width" placeholder="pixels">
 
-			<b>Border</b>
-			<br>
-			Color: <input type="color" id="border-color" placeholder="#e9e9e9"><br>
-			Width: <input type="number" id="border-width" placeholder="pixels">
+                <br><br>
+                
 
-			<br><br>
-			
-
-			<b>Music</b>
-			<br>
-			<input id="song-file" placholder="Song File">
+                <b>Music</b>
+                <br>
+                <input id="song-file" placholder="Song File">
+                <br>
+                .
+            </div>
 		</div>
 		
 
