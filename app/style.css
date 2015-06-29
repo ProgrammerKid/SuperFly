@@ -35,6 +35,15 @@ input#bg-dimmer {
 	height: 100px;
 }
 
+#preview {
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+
+}
+
 #save-profile, #load-profile, #delete-profile {
 	opacity: 0.8;
 }
