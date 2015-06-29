@@ -16,6 +16,13 @@ function cleanDumpingGround() {
     document.getElementById("images").value = dg;
 }
 
+function moveArrayElement(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+    return arr;
+}
+
 function preview() {
     cleanDumpingGround();
 	var images = document.getElementById("images").value;
@@ -42,6 +49,7 @@ function showHide(id) {
 
 function view() {
 	preview();
+    window.scrollTo(0, 0);
 	//lockdown the editor
 	document.getElementById("editor").hidden = true;
 	//unlock presentation board
@@ -123,19 +131,29 @@ function saveProfile() {
 	var profiles = localStorage.getItem("profiles");
 	if(profiles == undefined || profiles == "") {
 		localStorage.setItem("profiles", "");
-		profiles = "`" + name + "`";
+		profiles = [name];
 	} else {
-		if(profilesAsArray().indexOf(name) < 0)
-			profiles = "`" + name + "`," + profiles; //no spaces between commas and items
+        profiles = JSON.parse(profiles);
+		if(profiles.indexOf(name) < 0)
+			profiles.unshift(name); //no spaces between commas and items
+        else {
+            profiles = moveArrayElement(profiles, profiles.indexOf(name), 0);
+        }
+           
 	}
-	localStorage.setItem("profiles", profiles);
+    localStorage.setItem("profiles", JSON.stringify(profiles));
 
-	localStorage.setItem(name+"-brightness", brightness);
-	localStorage.setItem(name+"-images", images);
-	localStorage.setItem(name+"-bordercolor", bordercolor);
-	localStorage.setItem(name+"-borderwidth", borderwidth);
-	localStorage.setItem(name+"-songfile", songfile);
-	//refresh the page to clear up things
+    var newProf = {}; //the new profiles
+    newProf["name"] = name;
+    newProf["images"] = images.split(",");
+    newProf["brightness"] = brightness;
+    newProf["bordercolor"] = bordercolor;
+    newProf["borderwidth"] = borderwidth;
+    newProf["songfile"] = songfile;
+    
+    localStorage.setItem(name + "(profile)", JSON.stringify(newProf));
+
+    //refresh the page to clear up things
 	window.location = "index.html"
 }
 
@@ -147,11 +165,12 @@ function changeBGBrightness() {
 
 function loadProfile() {
 	var name = document.getElementById("load-profile-name").value;
-	var images = localStorage.getItem(name+"-images");
-	var brightness = localStorage.getItem(name+"-brightness");
-	var bordercolor = localStorage.getItem(name+"-bordercolor");
-	var borderwidth = localStorage.getItem(name+"-borderwidth");
-	var songfile = localStorage.getItem(name+"-songfile");
+    var profile = JSON.parse(localStorage.getItem(name + "(profile)"));
+	var images = profile.images;
+	var brightness = profile.brightness;
+	var bordercolor = profile.bordercolor;
+	var borderwidth = profile.borderwidth;
+	var songfile = profile.songfile;
 	//show in editor
 	document.getElementById("save-profile-name").value = name;
 	document.getElementById("images").value = images;
@@ -159,7 +178,7 @@ function loadProfile() {
 	document.getElementById("border-color").value = bordercolor;
 	document.getElementById("border-width").value = borderwidth;
 	document.getElementById("song-file").value = songfile;
-	//change stlyings to show up in the presentation
+	//change stylings to show up in the presentation
 	changeBGBrightness();
 	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
     preview();
@@ -169,14 +188,15 @@ function deleteProfile() {
 	var name = document.getElementById("delete-profile-name").value;
 	var request = confirm("Are you sure you want to delete " + name + ". This action cannot be reversed");
 	if(request != true) return 0; //if user exits prompt, then it doesn't show up as false, which is why we say anything but true, then exit
+    
+    profiles = JSON.parse(localStorage.getItem("profiles"));
+    // start/end splice
+    var splice1 = profiles.indexOf(name);
+    var splice2 = splice1 + 1;
+    profiles.splice(splice1, splice2);
+    localStorage.setItem("profiles", JSON.stringify(profiles));
 
-	var profiles = localStorage.getItem("profiles");
-	profiles = profiles.replace("`"+name+"`", "");
-	profiles = profiles.replace(",,", ",");
-	localStorage.setItem("profiles", profiles);
-	localStorage.removeItem(name+"-background");
-	localStorage.removeItem(name+"-images");
-	window.location = "index.html";
+    localStorage.setItem(name + "(profile)", undefined);
 }
 
 function addImage() {
@@ -276,23 +296,28 @@ $(document).ready(function() {
 
 
 	//automatically load profiles browse things
-	for(i in profilesAsArray()) {
-		if(profilesAsArray()[i] != "") {
-			var foo = document.createElement("OPTION");
-			foo.innerHTML = profilesAsArray()[i];
-			foo.value = profilesAsArray()[i];
-			document.getElementById("load-profile-name").appendChild(foo);
-		}
-	}
-	//and do the same for deleting profiles
-	for(i in profilesAsArray()) {
-		if(profilesAsArray()[i] != "") {
-			var foo = document.createElement("OPTION");
-			foo.innerHTML = profilesAsArray()[i];
-			foo.value = profilesAsArray()[i];
-			document.getElementById("delete-profile-name").appendChild(foo);
-		}
-	}
+    try {
+        var profiles = JSON.parse(localStorage.getItem("profiles"));
+        for(i in profiles) {
+            if(profiles[i] != "") {
+                var foo = document.createElement("OPTION");
+                foo.innerHTML = profiles[i];
+                foo.value = profiles[i];
+                document.getElementById("load-profile-name").appendChild(foo);
+            }
+        }
+	    //and do the same for deleting profiles
+        for(i in profiles) {
+            if(profiles[i] != "") {
+                var foo = document.createElement("OPTION");
+                foo.innerHTML = profiles[i];
+                foo.value = profiles[i];
+                document.getElementById("delete-profile-name").appendChild(foo);
+            }
+        }
+    } catch(SyntaxError) {
+        //then just do nothing
+    }
 	
 	//load the last made profile on startup
 	try { //incase there is no length to profiles (in the if statement)
