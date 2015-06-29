@@ -23,6 +23,12 @@ input#bg-dimmer {
 	outline: none;
 }
 
+a {
+    background-color: gray;
+    text-decoration: none;
+    color: black;
+}
+
 .editor {
 	margin-left: 20px;
 	margin-top: 20px;

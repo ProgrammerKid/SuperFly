@@ -4,9 +4,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SuperFly</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="jquery.js"></script>
-	<script src="superfly.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/superfly.js"></script>
+    <script src="js/help.js"></script>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 			<br>
             <br>
             <hr>
-			<h1>Slideshow Images</h1>
+			<h1>Slideshow Images <button onClick="help.slideshow_images()"</h1>
 			<br>
             <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').hidden = false">Enable Poweruser Mode</button>
             <button onClick="document.getElementById('images').hidden = true">Disable Poweruser Mode</button>
@@ -118,7 +119,8 @@
                 <br>
                 <input id="song-file" placholder="Song File">
             </div>
-            <br>.
+            <br><br>
+            <a href="help/index.html">HELP!</a>
 		</div>
 		
 

@@ -32,7 +32,7 @@ function preview() {
 		images = [images];
 	image_cache = images;
 	document.getElementById("preview").innerHTML = "";
-	for(i in images) {
+	for(var i in images) {
 		var img = document.createElement("IMG");
 		img.src = images[i];
 		img.height="100";
@@ -41,7 +41,7 @@ function preview() {
 }
 
 function showHide(id) {
-	if(document.getElementById(id).hidden == true)
+	if(document.getElementById(id).hidden === true)
 		document.getElementById(id).hidden = false;
 	else
 		document.getElementById(id).hidden = true;
@@ -99,25 +99,6 @@ function previous() {
 	changeImage(src);
 }
 
-function profilesAsArray() {
-	try {
-		var i = localStorage.getItem("profiles");
-		while(i.indexOf("`") >= 0)
-			i = i.replace("`", "'");
-		i = "[" + i + "]";
-	} catch(TypeError) {
-		i = "['']";
-	}
-	return eval(i);
-}
-
-function saveArrayAsProfile(i) {
-	var i = i + "";
-	while(i.indexOf("'") >= 0)
-		i = i.replace("'", "`");
-	localStorage.setItem("profiles", i);
-}
-
 function saveProfile() {
 	preview();
 	document.getElementById("preview").innerHTML = "";
@@ -129,7 +110,7 @@ function saveProfile() {
 	var songfile = document.getElementById("song-file").value;
 
 	var profiles = localStorage.getItem("profiles");
-	if(profiles == undefined || profiles == "") {
+	if(profiles === undefined || profiles === "") {
 		localStorage.setItem("profiles", "");
 		profiles = [name];
 	} else {
@@ -144,17 +125,17 @@ function saveProfile() {
     localStorage.setItem("profiles", JSON.stringify(profiles));
 
     var newProf = {}; //the new profiles
-    newProf["name"] = name;
-    newProf["images"] = images.split(",");
-    newProf["brightness"] = brightness;
-    newProf["bordercolor"] = bordercolor;
-    newProf["borderwidth"] = borderwidth;
-    newProf["songfile"] = songfile;
+    newProf.name = name;
+    newProf.images = images.split(",");
+    newProf.brightness = brightness;
+    newProf.bordercolor = bordercolor;
+    newProf.borderwidth = borderwidth;
+    newProf.songfile = songfile;
     
     localStorage.setItem(name + "(profile)", JSON.stringify(newProf));
 
     //refresh the page to clear up things
-	window.location = "index.html"
+	window.location = "index.html";
 }
 
 function changeBGBrightness() {
@@ -187,9 +168,9 @@ function loadProfile() {
 function deleteProfile() {
 	var name = document.getElementById("delete-profile-name").value;
 	var request = confirm("Are you sure you want to delete " + name + ". This action cannot be reversed");
-	if(request != true) return 0; //if user exits prompt, then it doesn't show up as false, which is why we say anything but true, then exit
+	if(request !== true) return 0; //if user exits prompt, then it doesn't show up as false, which is why we say anything but true, then exit
     
-    profiles = JSON.parse(localStorage.getItem("profiles"));
+    var profiles = JSON.parse(localStorage.getItem("profiles"));
     // start/end splice
     var splice1 = profiles.indexOf(name);
     var splice2 = splice1 + 1;
@@ -209,14 +190,10 @@ function addImage() {
 
 function removeImage() {
     preview();
-    debugger;
     var url = document.getElementById("removeImage").value;
     var dumpingGround = document.getElementById("images").value;
     dumpingGround = dumpingGround.replace(url, "");
-    dumpingGround = dumpingGround.split(",");;
-    document.getElementById("images").value = dumpingGround + "";
-
-    document.getElementById("removeImage").value = ""; //remove url after done, so that we can reuse the input field
+    dumpingGround = dumpingGround.split(","); document.getElementById("images").value = dumpingGround + ""; document.getElementById("removeImage").value = ""; //remove url after done, so that we can reuse the input field
     cleanDumpingGround();   
     preview();
 }
@@ -235,7 +212,7 @@ function swapImages() {
 function replaceImage() {
     var i_out = document.getElementById("sub-image-out").value;
     var i_in = document.getElementById("sub-image-in").value;
-    dg = document.getElementById("images").value;
+    var dg = document.getElementById("images").value;
     dg = dg.replace(i_out, i_in);
     document.getElementById("images").value = dg;
     preview();
@@ -298,8 +275,8 @@ $(document).ready(function() {
 	//automatically load profiles browse things
     try {
         var profiles = JSON.parse(localStorage.getItem("profiles"));
-        for(i in profiles) {
-            if(profiles[i] != "") {
+        for(var i in profiles) {
+            if(profiles[i] !== "") {
                 var foo = document.createElement("OPTION");
                 foo.innerHTML = profiles[i];
                 foo.value = profiles[i];
@@ -307,8 +284,8 @@ $(document).ready(function() {
             }
         }
 	    //and do the same for deleting profiles
-        for(i in profiles) {
-            if(profiles[i] != "") {
+        for(var i in profiles) {
+            if(profiles[i] !== "") {
                 var foo = document.createElement("OPTION");
                 foo.innerHTML = profiles[i];
                 foo.value = profiles[i];
