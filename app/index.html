@@ -39,14 +39,22 @@
 			<br>
 
 			<br><br>
-			<b>Slideshow Images</b>
+			<h1>Slideshow Images (Dumping Ground)</h1>
 			<br>
-			<textarea id="images"></textarea>
-
+            <button onClick="document.getElementById('images').disabled = false">Enable Poweruser Mode</button>
+            <button onClick="document.getElementById('images').disabled = true">Disable Poweruser Mode</button>
+            <br><br>
+			<textarea id="images" disabled></textarea>
+            <b>Add to Dumping ground</b>
+            <br>
+            <input id="newImageToAdd" /><button onClick="addImage()">Add</button>
 			<br>
-
-			<button onClick="preview()">Preview</button>
+            <b>Remove From Dumping Ground</b>
+            <br>
+            <input id="removeImage" /><button onClick="removeImage()">Remove</button>
+            <br><br>
 			<button onClick="view()">Continue</button>
+            <button onClick="preview()">Force Preview</button>
 			<div id="preview"></div>
 
 			<br><br>
@@ -75,9 +83,6 @@
 		<div hidden class="board" id="board">
 			<img class="foreground-img" id="fg">
 			<img class="background-blur" id="bg">
-			<div class="controls" id="controls">
-				Hello World
-			</div>
 		</div>
 	</div>
 </body>

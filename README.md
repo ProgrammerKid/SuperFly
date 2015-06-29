@@ -11,7 +11,6 @@ Currently, Superfly is not hosted anywhere... therefore at the current moment, y
 4. Find your path
  1. In Mac  OS, Linux, BSD, or other UNIX like OS's:  
   `pwd`  
-
  2. In Windows  
   `echo %CD%`
 5. Copy the `path`, from your terminal

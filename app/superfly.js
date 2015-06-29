@@ -178,6 +178,24 @@ function deleteProfile() {
 	window.location = "index.html";
 }
 
+function addImage() {
+    preview();
+    var url = document.getElementById("newImageToAdd").value;
+    document.getElementById("images").value = document.getElementById("images").value + ", " + url;
+    preview();
+}
+
+function removeImage() {
+    preview();
+    debugger;
+    var url = document.getElementById("removeImage").value;
+    var dumpingGround = document.getElementById("images").value;
+    dumpingGround = dumpingGround.replace(url, "");
+    dumpingGround = dumpingGround.split(",");;
+    document.getElementById("images").value = dumpingGround + "";
+    preview();
+}
+
 $(document).ready(function() {
 	$(document).scroll(function() {
 		if(slideshow_running)
@@ -242,20 +260,5 @@ $(document).ready(function() {
 	} catch(TypeError) {
 		//do nothing
 	}
-
-	//show/hide the controls
-	$(document).mousemove(function() {
-		if(slideshow_running) {
-			$(".controls").mouseover(function() {
-				$(".controls").fadeIn(800);
-			});
-			$(".controls").mouseleave(function() {
-				$(".controls").fadeOut(800);
-			});
-			$(".controls").mousemove(function() {
-				$(".controls").fadeIn(800);
-			});
-		}
-	});
 
 });
