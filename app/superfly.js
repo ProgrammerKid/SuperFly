@@ -201,6 +201,42 @@ function removeImage() {
     preview();
 }
 
+function swapImages() {
+    var img1 = document.getElementById("swap-image1").value;
+    var img2 = document.getElementById("swap-image2").value;
+    var dg = document.getElementById("images").value;
+    dg = dg.replace(img1, img1 + "*&*");
+    dg = dg.replace(img2, img1);
+    dg = dg.replace(img1 + "*&*", img2);
+    document.getElementById("images").value = dg;
+    preview();
+}
+
+function replaceImage() {
+    var i_out = document.getElementById("sub-image-out").value;
+    var i_in = document.getElementById("sub-image-in").value;
+    dg = document.getElementById("images").value;
+    dg = dg.replace(i_out, i_in);
+    document.getElementById("images").value = dg;
+    preview();
+
+}
+
+function squeezeImage() {
+    var dg = document.getElementById("images").value;
+    var newImg = document.getElementById("squeeze-image").value;
+    var pos = document.getElementById("squeeze-location").value;
+    if(pos == "beg" || pos == "end") {
+        if(pos == "beg") dg = newImg + "," + dg;
+        else dg = dg + "," + newImg;
+    } else {
+        var after = document.getElementById("squeeze-after").value;
+        dg = dg.replace(after, after + "," + newImg);
+    }
+    document.getElementById("images").value = dg;
+    preview();
+}
+
 $(document).ready(function() {
 	$(document).scroll(function() {
 		if(slideshow_running)

@@ -58,7 +58,7 @@
 			<button onClick="view()">Continue</button>
             <button onClick="preview()">Force Preview</button>
 			<div id="preview"></div>
-            <br><br>
+            <br>
             <hr>
             <h1>Bulldozer Tool</h1>
             <button onClick="showHide('bulldozer-tool')">Show/Hide The Bulldozer Tool</button>
@@ -77,7 +77,7 @@
                 <input id="sub-image-out" placeholder="Existing image" />
                 will be replaced with
                 <input id="sub-image-in" placeholder="New image" />
-
+                <button onClick="replaceImage()">Replace</button>
                 <br><br>
 
                 <b>Squeeze Image</b>
@@ -91,6 +91,7 @@
                 <input id="squeeze-image" placeholder="New image" />
                 should be placed at the beginning, end, or after
                 <input id="squeeze-after" placeholder="the existing image">
+                <button onClick="squeezeImage()">Squeeze</button>
             </div>
 			<br><br>
             <hr>
