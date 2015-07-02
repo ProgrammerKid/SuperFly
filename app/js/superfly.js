@@ -275,12 +275,46 @@ $(document).ready(function() {
 					music.pause();
 				break;
 
+                case 27: //esc(ape)
+                    showHide("board");
+                    showHide("editor");
+                    slideshow_running = 0;
+                    document.body.style.overflow = "scroll";
+                    music.pause();
+
+                case 32: //space(bar)
+                    next();
+                    break;
+
+                case 8: //backspace
+                    previous();
+                    break;
+
+                case 46: //delete (in case the user is on a mac) or has a keyboard that uses delte instead of backspace (such as some chromebooks)
+                    previous();
+                    break;
 
 				default:
 					return 0;
 			}
 			e.preventDefault();
 		}
+        else {
+            switch(e.which) {
+                case 116: //F5 (the present button for MS powerpoint)
+                    view();
+                    break;
+                case 107: //plus button (SHIFT + =)
+                    document.getElementById("newImageToAdd").focus();
+                    break;
+                case 109: //minus button (or dash/hyphen)
+                    document.getElementById("removeImage").focus();
+
+                default:
+                    return 0;
+            }
+            e.preventDefault();
+        }
 	});
 	
 	//settings the brightness of the background
