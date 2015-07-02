@@ -15,6 +15,7 @@
 	<div class="container">
 		<div class="editor" id="editor">
 			<button onClick="showHide('profileOptions')">Show/Hide Profile Options</button>
+			<button onClick="openSettings()">Settings</button>
 			<div class="profileOptions" id="profileOptions" hidden>
 				<span id="save-profile">
 					<b>Save Profile</b>
@@ -35,35 +36,36 @@
 				<span id="delete-profile">
 					<b><span style='color:red'>Delete Profile</span></b>
 					<br>
-					<select id="delete-profile-name"></select> <button onClick="deleteProfile()">Delete Profile</button>
+					<select id="delete-profile-name"></select>
+					<button onClick="deleteProfile()">Delete Profile</button>
 				</span>
                 <hr>
 			</div>
             <br>
-			<h1>Slideshow Images <button onClick="help.slideshow_images()">?</button></h1>
-			<br>
+		    <h1>Slideshow Images <button onClick="help.slideshow_images()">?</button></h1>
+		    <br>
             <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').hidden = false">Enable Poweruser Mode</button>
             <button onClick="document.getElementById('images').hidden = true">Disable Poweruser Mode</button>
             <button onClick="help.poweruser()">?</button>
             <br><br>
-			<textarea id="images" hidden></textarea>
+		    <textarea id="images" hidden></textarea>
             <b>Add to Dumping ground</b>
             <button onClick="help.addToDG()">?</button>
             <br><br>
             <input id="newImageToAdd" />
             <button onClick="addImage()">Add</button>
-			<br><br>
+		    <br><br>
             <b>Remove From Dumping Ground</b>
             <button onClick="help.removeFromDG()">?</button>
             <br><br>
             <input id="removeImage" />
             <button onClick="removeImage()">Remove</button>
             <br><br>
-			<button onClick="view()">Present</button>
+		    <button onClick="view()">Present</button>
             <button onClick="preview()">Preview</button>
             <br><br>
             <b>Preview Film (Preview Panel)</b>
-			<div id="preview"></div>
+		    <div id="preview"></div>
             <br>
             <hr>
             <h1>Bulldozer Tool</h1>
@@ -99,36 +101,8 @@
                 <input id="squeeze-after" placeholder="the existing image">
                 <button onClick="squeezeImage()">Squeeze</button>
             </div>
-			<br><br>
-            <hr>
-            <br><br>
-            <h1>Settings</h1>
-            <button onClick="showHide('settings')">Show/Hide Settings</button>
-            <div id="settings" hidden>
-                <b>Background Brightness (<span id="bg-dimmer-output">100%</span>)</b>
-                <br>
-                0% <input type="range" id="bg-dimmer" min=0 max=100 value=100> 100%
-                <br>&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <br><br>
-
-                <b>Border</b>
-                <br>
-                Color: <input type="color" id="border-color" placeholder="#e9e9e9"><br>
-                Width: <input type="number" id="border-width" placeholder="pixels">
-
-                <br><br>
-                
-
-                <b>Music</b>
-                <br>
-                <input id="song-file" placholder="Song File">
-            </div>
-            <br><br>
-            <a href="help/index.html">HELP!</a>
-		</div>
-		
-
+        </div>
+        
 		<div hidden class="board" id="board">
 			<img class="foreground-img" id="fg">
 			<img class="background-blur" id="bg">

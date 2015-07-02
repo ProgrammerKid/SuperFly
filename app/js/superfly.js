@@ -2,6 +2,14 @@ var image_cache = [];
 var curr_image = 0;
 var slideshow_running = 0;
 var music;
+var currProfile;
+
+function openSettings() {
+	throw("Opening settings");
+	var profile = currProfile;
+	localStorage.setItem("profile_queue", profile);
+	window.location = "settings.html";
+}
 
 function cleanDumpingGround() {
     var dg = document.getElementById("images").value; //dumping ground contents
@@ -33,10 +41,12 @@ function preview() {
 	image_cache = images;
 	document.getElementById("preview").innerHTML = "";
 	for(var i in images) {
-		var img = document.createElement("IMG");
-		img.src = images[i];
-		img.height="100";
-		document.getElementById("preview").appendChild(img);
+		if(i !== undefined && i !== null) {
+			var img = document.createElement("IMG");
+			img.src = images[i];
+			img.height="100";
+			document.getElementById("preview").appendChild(img);
+		}
 	}
 }
 
@@ -49,6 +59,8 @@ function showHide(id) {
 
 function view() {
 	preview();
+	var profile = JSON.parse(localStorage.getItem(currProfile + "(profile)"));
+	
     window.scrollTo(0, 0);
 	//lockdown the editor
 	document.getElementById("editor").hidden = true;
@@ -61,15 +73,15 @@ function view() {
 	document.body.style.overflow = "hidden";
     
     //border styling fix:
-    var bordercolor = document.getElementById("border-color").value;
-    var borderwidth = document.getElementById("border-width").value;
+    var bordercolor = profile.bordercolor;
+    var borderwidth = profile.borderwidth;
     document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
 
 	//play music
 	music = document.createElement("VIDEO");
 	var source = document.createElement("SOURCE");
 	source.type = "audio/mp3";
-	source.src = document.getElementById("song-file").value;
+	source.src = profile.songfile;
 	music.appendChild(source);
 	music.autoplay = true;
 	music.controls = true;
@@ -106,13 +118,8 @@ function previous() {
 
 function saveProfile() {
 	preview();
-	document.getElementById("preview").innerHTML = "";
 	var name = document.getElementById("save-profile-name").value;
 	var images = document.getElementById("images").value;
-	var brightness = document.getElementById("bg-dimmer").value;
-	var bordercolor = document.getElementById("border-color").value;
-	var borderwidth = document.getElementById("border-width").value;
-	var songfile = document.getElementById("song-file").value;
 
 	var profiles = localStorage.getItem("profiles");
 	if(profiles === undefined || profiles === null || profiles === "") {
@@ -128,14 +135,20 @@ function saveProfile() {
            
 	}
     localStorage.setItem("profiles", JSON.stringify(profiles));
-
+	var thisProf = JSON.parse(localStorage.getItem(name + "(profile)"));
     var newProf = {}; //the new profiles
     newProf.name = name;
+    debugger;
     newProf.images = images.split(",");
-    newProf.brightness = brightness;
-    newProf.bordercolor = bordercolor;
-    newProf.borderwidth = borderwidth;
-    newProf.songfile = songfile;
+    try {
+		newProf.brightness = thisProf.brightness;
+		newProf.bordercolor = thisProf.bordercolor;
+		newProf.borderwidth = thisProf.borderwidth;
+		newProf.songfile = thisProf.songfile;
+	} catch(TypeError) {
+		//if the settings have not been defined yet
+		//just do nothing here
+	}
     
     localStorage.setItem(name + "(profile)", JSON.stringify(newProf));
 
@@ -144,26 +157,22 @@ function saveProfile() {
 }
 
 function changeBGBrightness() {
-	document.getElementById("bg-dimmer-output").innerHTML = document.getElementById("bg-dimmer").value + "%";
-	document.getElementById("bg").style.opacity = parseInt(document.getElementById("bg-dimmer").value)/100;
+	var profile = JSON.parse(localStorage.getItem(currProfile + "(profile)"));
+	document.getElementById("bg").style.opacity = (parseInt(profile.brightness)/100) + "";
 
 }
 
 function loadProfile() {
 	var name = document.getElementById("load-profile-name").value;
+	currProfile = name;
     var profile = JSON.parse(localStorage.getItem(name + "(profile)"));
 	var images = profile.images;
-	var brightness = profile.brightness;
 	var bordercolor = profile.bordercolor;
 	var borderwidth = profile.borderwidth;
 	var songfile = profile.songfile;
+	document.getElementById("save-profile-name").value = name; //make it easier for the user to save
 	//show in editor
-	document.getElementById("save-profile-name").value = name;
 	document.getElementById("images").value = images;
-	document.getElementById("bg-dimmer").value = parseInt(brightness);
-	document.getElementById("border-color").value = bordercolor;
-	document.getElementById("border-width").value = borderwidth;
-	document.getElementById("song-file").value = songfile;
 	//change stylings to show up in the presentation
 	changeBGBrightness();
 	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
@@ -308,5 +317,8 @@ $(document).ready(function() {
 	} catch(TypeError) {
 		//do nothing
 	}
+	
+	currProfile = document.getElementById("load-profile-name").value
+	
     preview();
 });
