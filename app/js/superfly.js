@@ -59,6 +59,11 @@ function view() {
 	slideshow_running = 1;
 	//no scrolling
 	document.body.style.overflow = "hidden";
+    
+    //border styling fix:
+    var bordercolor = document.getElementById("border-color").value;
+    var borderwidth = document.getElementById("border-width").value;
+    document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
 
 	//play music
 	music = document.createElement("VIDEO");
