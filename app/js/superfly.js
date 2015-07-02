@@ -115,7 +115,7 @@ function saveProfile() {
 	var songfile = document.getElementById("song-file").value;
 
 	var profiles = localStorage.getItem("profiles");
-	if(profiles === undefined || profiles === "") {
+	if(profiles === undefined || profiles === null || profiles === "") {
 		localStorage.setItem("profiles", "");
 		profiles = [name];
 	} else {
