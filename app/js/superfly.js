@@ -5,7 +5,6 @@ var music;
 var currProfile;
 
 function openSettings() {
-	throw("Opening settings");
 	var profile = currProfile;
 	localStorage.setItem("profile_queue", profile);
 	window.location = "settings.html";
@@ -78,16 +77,18 @@ function view() {
     document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
 
 	//play music
-	music = document.createElement("VIDEO");
-	var source = document.createElement("SOURCE");
-	source.type = "audio/mp3";
-	source.src = profile.songfile;
-	music.appendChild(source);
-	music.autoplay = true;
-	music.controls = true;
-	music.hidden = true;
-	document.body.appendChild(music);
-	music.play();
+    if(profile.songfile !== undefined && profile.songfile !== null) {
+        music = document.createElement("VIDEO");
+        var source = document.createElement("SOURCE");
+        source.type = "audio/mp3";
+        source.src = profile.songfile;
+        music.appendChild(source);
+        music.autoplay = true;
+        music.controls = true;
+        music.hidden = true;
+        document.body.appendChild(music);
+        music.play();
+    }
 }
 
 function changeImage(src) {
@@ -138,7 +139,6 @@ function saveProfile() {
 	var thisProf = JSON.parse(localStorage.getItem(name + "(profile)"));
     var newProf = {}; //the new profiles
     newProf.name = name;
-    debugger;
     newProf.images = images.split(",");
     try {
 		newProf.brightness = thisProf.brightness;
@@ -274,6 +274,7 @@ $(document).ready(function() {
 					document.body.style.overflow = "scroll";
 					music.pause();
 				break;
+
 
 				default:
 					return 0;

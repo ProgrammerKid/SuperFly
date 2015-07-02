@@ -19,6 +19,9 @@ function saveProfile() {
 	var bordercolor = document.getElementById("border-color").value;
 	var borderwidth = document.getElementById("border-width").value;
 	var songfile = document.getElementById("song-file").value;
+    
+    //we also need to save the images, otherwise they will all be removed
+    var images = profile.images;
 
     var newProf = {}; //the new profile
     newProf.name = name;
@@ -26,7 +29,7 @@ function saveProfile() {
     newProf.bordercolor = bordercolor;
     newProf.borderwidth = borderwidth;
     newProf.songfile = songfile;
-    
+    newProf.images = images;
     localStorage.setItem(name + "(profile)", JSON.stringify(newProf));
 
     //go back home
