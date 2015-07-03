@@ -25,7 +25,8 @@
 
                 <b>Border</b>
                 <br/>
-                Color: <input type="color" id="border-color" placeholder="#e9e9e9" /><br/>
+                Color: <input type="color" id="border-color" placeholder="#e9e9e9" />
+                <br/><br/>
                 Width: <input type="number" id="border-width" placeholder="pixels" />
 
                 <br/><br/>
@@ -37,7 +38,9 @@
             </div>
             <br/><br/>
 		</div>
+        <button onClick="window.location='index.html'">Cancel</button>
 		<button onClick="saveProfile()">Save</button>
-	</div>
+	    <button onClick="saveProfile();window.location='index.html'">Done</button>
+    </div>
 </body>
 </html>
