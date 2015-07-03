@@ -4,6 +4,11 @@ var slideshow_running = 0;
 var music;
 var currProfile;
 
+function hideAllMenuItems() {
+    document.getElementById("profileOptions").hidden = "true";
+    document.getElementById("add-remove-images").hidden = "true";
+}
+
 function openSettings() {
     saveProfile();
 	localStorage.setItem("profile_queue", currProfile);
