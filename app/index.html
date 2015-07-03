@@ -16,7 +16,11 @@
 		<div class="editor" id="editor">
 			<button onClick="showHide('profileOptions')">Show/Hide Profile Options</button>
 			<button onClick="openSettings()">Settings</button>
+			<button onClick="showHide('add-remove-images')">Add/Remove Images</button>
 			<button onClick="openBulldozer()">Bulldozer</button>
+		    <button onClick="view()">Present</button>
+            <button onClick="preview()">Preview</button>
+            <br/><br/> 
 			<div class="profileOptions" id="profileOptions" hidden>
 				<span id="save-profile">
 					<b>Save Profile</b>
@@ -40,24 +44,20 @@
 					<select id="delete-profile-name"></select>
 					<button onClick="deleteProfile()">Delete Profile</button>
 				</span>
-                <hr>
 			</div>
             <br/>
 		    <textarea id="images" hidden></textarea>
-            <b>Add to Dumping ground</b>
-            <button onClick="help.addToDG()">?</button>
-            <br/><br/>
-            <input id="newImageToAdd" />
-            <button onClick="addImage()">Add</button>
-		    <br/><br/>
-            <b>Remove From Dumping Ground</b>
-            <button onClick="help.removeFromDG()">?</button>
-            <br/><br/>
-            <input id="removeImage" />
-            <button onClick="removeImage()">Remove</button>
-            <br/><br/>
-		    <button onClick="view()">Present</button>
-            <button onClick="preview()">Preview</button>
+		    <div id="add-remove-images" hidden>
+		        <button onClick="help.addToDG()">?</button>
+		        <b>Add Image: </b>
+		        <input id="newImageToAdd" />
+		        <button onClick="addImage()">Add</button>
+				<br/><br/>
+		        <button onClick="help.removeFromDG()">?</button>
+		        <b>Remove Image:</b>
+		        <input id="removeImage" />
+		        <button onClick="removeImage()">Remove</button>
+		    </div>
             <br/><br/>
             <b>Preview Film (Preview Panel)</b>
 		    <div id="preview"></div>

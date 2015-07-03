@@ -38,7 +38,7 @@ function saveProfile() {
 	var images = document.getElementById("images").value;
 	var profile = JSON.parse(localStorage.getItem(name + "(profile)"));
 	profile.images = images.split(",");
-	localStorage.getItem(name + "(profile)", JSON.stringify(images));
+	localStorage.setItem(name + "(profile)", JSON.stringify(profile));
 }
 
 function swapImages() {
@@ -50,6 +50,7 @@ function swapImages() {
     dg = dg.replace(img1 + "*&*", img2);
     document.getElementById("images").value = dg;
     preview();
+    saveProfile();
 }
 
 function replaceImage() {
@@ -59,22 +60,21 @@ function replaceImage() {
     dg = dg.replace(i_out, i_in);
     document.getElementById("images").value = dg;
     preview();
-
+    saveProfile();
 }
 
 function squeezeImage() {
     var dg = document.getElementById("images").value;
     var newImg = document.getElementById("img1").value;
-    var pos = document.getElementById("squeeze-location").value;
-    if(pos == "beg" || pos == "end") {
-        if(pos == "beg") dg = newImg + "," + dg;
-        else dg = dg + "," + newImg;
+    var after = document.getElementById("img2").value;
+    if(after === undefined || after === null || after === "") {
+        document.getElementById("images").value = newImg + "," + document.getElementById("images").value
     } else {
-        var after = document.getElementById("img2").value;
         dg = dg.replace(after, after + "," + newImg);
+        document.getElementById("images").value = dg;
     }
-    document.getElementById("images").value = dg;
     preview();
+    saveProfile();
 }
 
 function applyBulldoze() {
@@ -85,8 +85,6 @@ function applyBulldoze() {
         replaceImage();
     else if(action == "sqeeze")
         squeezeImage();
-    
-    saveProfile();
 }
 
 $(document).ready(function() {
