@@ -1,0 +1,40 @@
+//the reason this file does not start with a . is
+//because we want this sample to be an unhidden
+//file
+
+//something you probably didn't realize is that
+//the rc is not just a js look alike
+//it actually runs through the JS interpreter
+//so you can make it do whatever the hell you want
+//and i'm not even sure if you can access ajax shit
+//though the rc... ill have to make a firewall for that
+
+//note: don't make any custom variables, or functions outside of the namespace / object
+
+var superflyrc = {
+    plugins: ["http://github.com/ProgrammerKid/superfly/app/css/style.css"], //imports a CSS plugin, it can also import JS plugins
+    
+    input_css: {
+        default: {
+            background: "white",
+            color: "black"
+        },
+
+        hover: {
+            background: "black",
+            color: "white"
+        }
+    }, //modify the CSS properties of the input element
+
+    highlight: "true", //allows highlighting text on the page
+
+    main: function() { //the main method but for the startup process... although this is a main method this will be run after the application has been setup to match its default rc
+        //red background color
+        document.html.style.backgroundColor = "red";
+        document.body.style.backgroundColor = "red";
+
+        //white text font color
+        document.html.style.color = "white";
+        document.body.style.color = "white";
+    }
+}
