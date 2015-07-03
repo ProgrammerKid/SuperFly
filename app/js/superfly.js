@@ -4,6 +4,10 @@ var slideshow_running = 0;
 var music;
 var currProfile;
 
+function openRC() {
+    window.location = "editRC.html";
+}
+
 function hideAllMenuItems() {
     document.getElementById("profileOptions").hidden = "true";
     document.getElementById("add-remove-images").hidden = "true";

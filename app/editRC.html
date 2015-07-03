@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <title>.superflyrc</title>
+    <script src="jquery.js"></script>
+    <script>
+        function save() {
+            var content = document.getElementById("superflyrc");
+            localStorage.setItem(".superflyrc", content);
+        }
+
+        $(document).ready(function() {
+            document.getElementById("superflyrc").value = localStorage.getItem(".superflyrc");
+        });
+    </script>
+</head>
+
+<body>
+    <textarea id="superflyrc"></textarea>
+    <button onClick="save()">Save</button>
+</body>
+</html>
+
+<!--
+*Note: all scripts will stay here... no external files will be dedicated towards this editor page, as this is a developer's feature, and does not contribute towards the application for the general user. and it is not worth the messiness to generate more files for an experimental feature.
+-->
