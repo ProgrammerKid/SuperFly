@@ -2,7 +2,7 @@
 html, body {
     background-color: red;
 	margin: 0; padding: 0;
-	background-color: #FF5722;
+	background-color: #007AFF;
     font-family: 'Cantarell', sans-serif;
     user-select: none;
     color: #FFCCBC;
@@ -27,6 +27,14 @@ input#bg-dimmer {
 	outline: none;
 }
 
+button:focus, button:active, button:hover,
+input:focus, input:active, input:hover,
+textarea:focus, input:active, input:hover
+{
+    background: #1F1F21;
+    color: white;
+}
+
 a {
     background-color: gray;
     text-decoration: none;
@@ -39,6 +47,12 @@ hr {
     background: rgba(255, 255, 255, 0.5);
     font-size: 0;
     border: 0;
+}
+
+.menu-bar {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    padding: 20px;
 }
 
 .editor {
