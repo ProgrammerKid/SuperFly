@@ -45,6 +45,9 @@
             <br>
 		    <h1>Slideshow Images <button onClick="help.slideshow_images()">?</button></h1>
 		    <br>
+            <button onClick="if(confirm('Just be careful. One tiny messup, you could ruin your whole slideshow.. =)')) document.getElementById('images').hidden = false">Enable Poweruser Mode</button>
+            <button onClick="document.getElementById('images').hidden = true">Disable Poweruser Mode</button>
+            <button onClick="help.poweruser()">?</button>
             <br><br>
 		    <textarea id="images" hidden></textarea>
             <b>Add to Dumping ground</b>

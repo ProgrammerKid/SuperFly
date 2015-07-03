@@ -1,4 +1,4 @@
-var image_cache = new Array();
+var image_cache = [];
 var curr_image = 0;
 var slideshow_running = 0;
 var music;
@@ -324,4 +324,4 @@ $(document).ready(function() {
 	currProfile = document.getElementById("load-profile-name").value
 	
     preview();
-});
+});function preview
