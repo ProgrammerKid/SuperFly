@@ -29,7 +29,8 @@ input#bg-dimmer {
 
 button:focus, button:active, button:hover,
 input:focus, input:active, input:hover,
-textarea:focus, input:active, input:hover
+textarea:focus, input:active, input:hover,
+select:focus, select:focus, select:hover
 {
     background: #1F1F21;
     color: white;
