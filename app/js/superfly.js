@@ -8,6 +8,22 @@ function openRC() {
     window.location = "editRC.html";
 }
 
+function cleanArray(array) {
+    var tmp = [];
+    for(var i in array) {
+        if(array[i] !== null && array[i] !== undefined)
+            tmp.push(array[i]);
+    }
+    return tmp;
+}
+
+function moveArrayElement(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+    return arr;
+}
+
 function hideAllMenuItems() {
     document.getElementById("profileOptions").hidden = "true";
     document.getElementById("add-remove-images").hidden = "true";
@@ -19,34 +35,13 @@ function openSettings() {
 	window.location = "settings.html";
 }
 
-function openBulldozer() {
+/*function openBulldozer() {
     saveProfile();
 	localStorage.setItem("profile_queue", currProfile);
 	window.location = "bulldozer.html";
-}
-
-function cleanDumpingGround() {
-    var dg = document.getElementById("images").value; //dumping ground contents
-    while(dg.indexOf(" ") >= 0)
-        dg = dg.replace(" ", "");
-    while(dg.indexOf(",,") >= 0)
-        dg = dg.replace(",,", ",");
-
-    if(dg.charAt(0) == ",")
-        dg = dg.substr(1, dg.length);
-
-    document.getElementById("images").value = dg;
-}
-
-function moveArrayElement(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
-    return arr;
-}
+}*/
 
 function preview() {
-    cleanDumpingGround();
 	var images = document.getElementById("images").value;
 	if(images.indexOf(",") >= 0)
 		images = images.split(",");
@@ -72,9 +67,13 @@ function showHide(id) {
 }
 
 function view() {
-	preview();
 	var profile = JSON.parse(localStorage.getItem(currProfile + "(profile)"));
-	
+	var slideshow_images = document.getElementsByClassName("slideshow-image");
+    image_cache = [];
+    for(var i in slideshow_images) {
+        image_cache.push(slideshow_images[i].src);
+    }
+    image_cache = cleanArray(image_cache);
     window.scrollTo(0, 0);
 	//lockdown the editor
 	document.getElementById("editor").hidden = true;
@@ -104,6 +103,8 @@ function view() {
         document.body.appendChild(music);
         music.play();
     }
+    //hide top bar
+    document.getElementsByClassName("menu-bar")[0].hidden = true;
 }
 
 function changeImage(src) {
@@ -133,9 +134,19 @@ function previous() {
 }
 
 function saveProfile() {
-	preview();
 	var name = document.getElementById("save-profile-name").value;
-	var images = document.getElementById("images").value;
+    var images = [];
+    var imageObjs = document.getElementsByClassName("slideshow-image");
+    for(var i in imageObjs) {
+        var src = imageObjs[i].src;
+        images.push(src);
+    }
+    var tmp = [];
+    for(var i in images) {
+        if(images[i] != null && images[i] != undefined)
+            tmp.push(images[i]);
+    }
+    images = tmp;
 
 	var profiles = localStorage.getItem("profiles");
 	if(profiles === undefined || profiles === null || profiles === "") {
@@ -154,7 +165,7 @@ function saveProfile() {
 	var thisProf = JSON.parse(localStorage.getItem(name + "(profile)"));
     var newProf = {}; //the new profiles
     newProf.name = name;
-    newProf.images = images.split(",");
+    newProf.images = images;
     try {
 		newProf.brightness = thisProf.brightness;
 		newProf.bordercolor = thisProf.bordercolor;
@@ -182,13 +193,17 @@ function loadProfile() {
 	var bordercolor = profile.bordercolor;
 	var borderwidth = profile.borderwidth;
 	var songfile = profile.songfile;
+    console.log(images);
+    for(var i in images) {
+        document.getElementById("newImageToAdd").value = images[i];
+        addImage();
+    }
+    document.getElementById("newImageToAdd").value = "";
+
 	document.getElementById("save-profile-name").value = name; //make it easier for the user to save
-	//show in editor
-	document.getElementById("images").value = images;
 	//change stylings to show up in the presentation
 	changeBGBrightness();
 	document.getElementById("fg").style.border = borderwidth + "px solid " + bordercolor;
-    preview();
 }
 
 function deleteProfile() {
@@ -207,21 +222,18 @@ function deleteProfile() {
 }
 
 function addImage() {
-    preview();
-    var url = document.getElementById("newImageToAdd").value;
-    document.getElementById("images").value = document.getElementById("images").value + ", " + url;
-    document.getElementById("newImageToAdd").value = ""; //remove url after done, so that we can reuse the input field
-    preview();
+    var src = document.getElementById("newImageToAdd").value;
+    var img = document.createElement("IMG");
+    img.className = "slideshow-image";
+    img.src = src;
+    document.getElementById("preview").appendChild(img);
 }
 
 function removeImage() {
-    preview();
     var url = document.getElementById("removeImage").value;
     var dumpingGround = document.getElementById("images").value;
     dumpingGround = dumpingGround.replace(url, "");
     dumpingGround = dumpingGround.split(","); document.getElementById("images").value = dumpingGround + ""; document.getElementById("removeImage").value = ""; //remove url after done, so that we can reuse the input field
-    cleanDumpingGround();   
-    preview();
 }
 
 
@@ -247,16 +259,18 @@ $(document).ready(function() {
 				case 40: //down
 					showHide("board");
 					showHide("editor");
+                    document.getElementsByClassName("menu-bar")[0].hidden = false;
 					slideshow_running = 0;
-					document.body.style.overflow = "scroll";
+					document.body.style.overflowY = "scroll";
 					music.pause();
 				break;
 
                 case 27: //esc(ape)
                     showHide("board");
                     showHide("editor");
+                    document.getElementsByClassName("menu-bar")[0].hidden = false;
                     slideshow_running = 0;
-                    document.body.style.overflow = "scroll";
+                    document.body.style.overflowY = "scroll";
                     music.pause();
 
                 case 32: //space(bar)
@@ -322,15 +336,6 @@ $(document).ready(function() {
         //then just do nothing
     }
 	
-	//load the last made profile on startup
-	try { //incase there is no length to profiles (in the if statement)
-		if(localStorage.getItem("profiles").length > 1)
-			loadProfile();
-	} catch(TypeError) {
-		//do nothing
-	}
-	
 	currProfile = document.getElementById("load-profile-name").value
 	
-    preview();
 });
