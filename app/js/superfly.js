@@ -332,6 +332,7 @@ $(document).ready(function() {
                 document.getElementById("delete-profile-name").appendChild(foo);
             }
         }
+        loadProfile();
     } catch(SyntaxError) {
         //then just do nothing
     }
