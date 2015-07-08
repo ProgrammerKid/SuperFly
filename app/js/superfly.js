@@ -27,6 +27,7 @@ function moveArrayElement(arr, fromIndex, toIndex) {
 function hideAllMenuItems() {
     document.getElementById("profileOptions").hidden = "true";
     document.getElementById("add-remove-images").hidden = "true";
+    document.getElementById("import-export").hidden = "true";
 }
 
 function openSettings() {
@@ -193,7 +194,6 @@ function loadProfile() {
 	var bordercolor = profile.bordercolor;
 	var borderwidth = profile.borderwidth;
 	var songfile = profile.songfile;
-    console.log(images);
     for(var i in images) {
         document.getElementById("newImageToAdd").value = images[i];
         addImage();
@@ -236,6 +236,19 @@ function removeImage() {
     dumpingGround = dumpingGround.split(","); document.getElementById("images").value = dumpingGround + ""; document.getElementById("removeImage").value = ""; //remove url after done, so that we can reuse the input field
 }
 
+function exportProfile() {
+    var exports = localStorage.getItem(currProfile + "(profile)");
+    document.getElementById("export-key").value = exports;
+}
+
+function importProfile(key) {
+    key = JSON.parse(key);
+    var profiles = JSON.parse(localStorage.getItem("profiles"));
+    profiles.unshift(key.name);
+    localStorage.setItem("profiles", JSON.stringify(profiles));
+    localStorage.setItem(key.name + "(profile)", JSON.stringify(key));
+    window.location = "index.html";
+}
 
 $(document).ready(function() {
 	$(document).scroll(function() {

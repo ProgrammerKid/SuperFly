@@ -15,7 +15,8 @@
 <body>
 	<div class="container">
         <div class="menu-bar">
-            <button onClick="hideAllMenuItems();showHide('profileOptions')">Show/Hide Profile Options</button>
+            <button onClick="hideAllMenuItems();showHide('profileOptions')">Profile Options</button>
+            <button onClick="hideAllMenuItems();showHide('import-export')">Import/Export</button>
             <button onClick="hideAllMenuItems();showHide('add-remove-images')">Add An Image</button>
             <button onClick="window.location = 'manage_plugins.html'">Manage Plugins</button>
             <button onClick="view()">Present</button>
@@ -59,7 +60,14 @@
 				</span>
 			</div>
             <br/>
-		    <textarea id="images" hidden></textarea>
+            <div id="import-export" hidden>
+                <b>Export</b>
+                <input onClick="exportProfile();this.select();alert('Now copy the exports key')" id="export-key" value="Click Me" />
+                <br/><br/>
+                <b>Import</b>
+                <input onClick="importProfile(prompt('Enter the exports key here:'))" value="Click Me"/>
+            </div>
+            <br/>
 		    <div id="add-remove-images" hidden>
 		        <button onClick="help.addToDG()">?</button>
 		        <b>Add Image: </b>
