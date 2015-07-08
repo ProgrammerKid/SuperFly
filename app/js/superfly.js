@@ -243,8 +243,15 @@ function exportProfile() {
 
 function importProfile(key) {
     key = JSON.parse(key);
-    var profiles = JSON.parse(localStorage.getItem("profiles"));
-    profiles.unshift(key.name);
+    try {
+        var profiles = JSON.parse(localStorage.getItem("profiles"));
+        profiles.unshift(key.name);
+    } catch (TypeError) {
+        localStorage.setItem("profiles", "[]");
+        var profiles = JSON.parse(localStorage.getItem("profiles"));
+        profiles.unshift(key.name);
+    }
+
     localStorage.setItem("profiles", JSON.stringify(profiles));
     localStorage.setItem(key.name + "(profile)", JSON.stringify(key));
     window.location = "index.html";
