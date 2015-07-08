@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/jquery.js"></script>
 	<script src="js/superfly.js"></script>
+    <script src="js/exec_plugins.js"></script>
     <script src="js/help.js"></script>
 </head>
 
@@ -15,8 +16,8 @@
 	<div class="container">
         <div class="menu-bar">
             <button onClick="hideAllMenuItems();showHide('profileOptions')">Show/Hide Profile Options</button>
-            <button onClick="openSettings()">Settings</button>
-            <button onClick="hideAllMenuItems();showHide('add-remove-images')">Add/Remove Images</button>
+            <button onClick="hideAllMenuItems();showHide('add-remove-images')">Add An Image</button>
+            <button onClick="window.location = 'manage_plugins.html'">Manage Plugins</button>
             <button onClick="view()">Present</button>
         </div>
 		<div class="editor" id="editor">
@@ -64,11 +65,6 @@
 		        <b>Add Image: </b>
 		        <input id="newImageToAdd" />
 		        <button onClick="addImage()">Add</button>
-				<br/><br/>
-		        <button onClick="help.removeFromDG()">?</button>
-		        <b>Remove Image:</b>
-		        <input id="removeImage" />
-		        <button onClick="removeImage()">Remove</button>
 		    </div>
             <br/><br/>
             <b>Preview Film (Preview Panel)</b>
