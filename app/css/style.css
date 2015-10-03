@@ -2,7 +2,8 @@
 html, body {
     background-color: red;
 	margin: 0; padding: 0;
-	background-color: #007AFF;
+	/*background: #007AFF;*/
+    background: gold;
     font-family: 'Cantarell', sans-serif;
     user-select: none;
     color: rgba(255, 255, 255, 0.7);
